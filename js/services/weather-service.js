@@ -9,7 +9,6 @@ function getForcast(coords) {
     // }
     return axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lng}&appid=bb92276d35d1215a8ad73c28452671a0`)
         .then(res => {
-            console.log(res.data)
             return {
                 temp: kelvinToCelsius(res.data.main.temp).toFixed(1),
                 feelsLike: res.data.main.feels_like,
@@ -24,9 +23,9 @@ function getForcast(coords) {
 }
 
 function kelvinToCelsius(degInKelvin) {
-	return (degInKelvin - 273.15);
+    return (degInKelvin - 273.15);
 }
 
 function kelvinToFahrenheit(degInKelvin) {
-	return (degInKelvin * (9 / 5) - 459.67);
+    return (degInKelvin * (9 / 5) - 459.67);
 }
