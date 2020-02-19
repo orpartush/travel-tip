@@ -1,5 +1,3 @@
-// console.log('Main!');
-
 import locService from './services/loc-service.js';
 import mapService from './services/map-service.js';
 import weatherService from './services/weather-service.js';
@@ -97,7 +95,12 @@ function renderWeather() {
          <p>wind speed:${res.windSpeed}</p>
          <p>wind speed:${res.windDirection}</p>`
 
-		let elWeather = document.querySelector('.weather-container');
-		elWeather.innerHTML = strHTML;
-	})
+        let elWeather = document.querySelector('.weather-container');
+        elWeather.innerHTML = strHTML;
+    })
 }
+
+document.querySelector('.loc-search-btn').addEventListener('click', () => {
+    let locationTxt = document.querySelector('.location-text').value;
+    let x = locService.findLocation(locationTxt).then();
+})
