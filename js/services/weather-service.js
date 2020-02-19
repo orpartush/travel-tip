@@ -24,9 +24,9 @@ function getForcast(coords) {
 }
 
 function kelvinToCelsius(degInKelvin) {
-    return (degInKelvin - 273.15);
+	return (degInKelvin - 273.15);
 }
 
 function kelvinToFahrenheit(degInKelvin) {
-    return (degInKelvin * (9 / 5) - 459.67);
+	return (degInKelvin * (9 / 5) - 459.67);
 }
