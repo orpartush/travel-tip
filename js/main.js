@@ -67,8 +67,10 @@ document.querySelector('.my-loc-btn').addEventListener('click', () => {
 
 document.querySelector('.copy-loc-btn').addEventListener('click', () => {
 	let elHiddenTxt = document.querySelector('.hidden-url');
-	let currLocLink = `http://127.0.0.1:5501/index.html?lat=${coords.lat}&lng=${coords.lng}`;
-	elHiddenTxt.value = currLocLink;
+	let currUrl = window.location.href;
+	let lockUrl = `${currUrl}?lat=${coords.lat}&lng=${coords.lng}`;
+	console.log(lockUrl);
+	elHiddenTxt.value = lockUrl;
 	elHiddenTxt.select();
 	document.execCommand('copy');
 });
@@ -76,11 +78,12 @@ document.querySelector('.copy-loc-btn').addEventListener('click', () => {
 
 
 document.querySelector('.loc-search-btn').addEventListener('click', () => {
-	let locationTxt = document.querySelector('.location-text').value;
-	locService.findLocation(locationTxt).then(res => {
+	let locSearch = document.querySelector('.location-text');
+	locService.findLocation(locSearch.value).then(res => {
 		coords.lat = res.lat;
 		coords.lng = res.lng;
-		renderWeather()
+		renderWeather();
+		locSearch.value = '';
 	});
 })
 
