@@ -4,8 +4,6 @@ export default {
     panTo
 }
 
-//vova's key
-const MAPS_KEY = 'AIzaSyCWZ8SVphkFIwIS-JWNMRklKJvHjGNQH3I';
 
 var map;
 
@@ -43,7 +41,9 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = ''; //TODO: Enter your API Key
+        //vova's key
+    const API_KEY = 'AIzaSyCWZ8SVphkFIwIS-JWNMRklKJvHjGNQH3I';
+
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
