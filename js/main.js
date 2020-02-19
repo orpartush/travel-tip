@@ -1,15 +1,18 @@
-console.log('Main!');
+// console.log('Main!');
 
 import locService from './services/loc-service.js';
 import mapService from './services/map-service.js';
 import weatherService from './services/weather-service.js';
 
-weatherService.getForcast();
+// weatherService.getForcast();
 
-// let locs = locService.getLocs()
-// 	.then(locsRes => locsRes[0]);
-// console.log(locs);
 
+let coords = { lat: 67, lng: -50 }
+
+locService.getLocs(coords)
+    .then(locs => console.log('locs', locs))
+
+console.log(weatherService.getForcast(coords))
 
 window.onload = () => {
 	mapService.initMap()
@@ -70,6 +73,7 @@ document.querySelector('.copy-loc').addEventListener('click', () => {
 			let currLocLink = `https://orpartush.github.io/travel-tip/?lat=${lat}&lng=${lng}`;
 			console.log(currLocLink);
 		});
+	})
 	// console.log(locs);
 	// locs.then(currLoc => {
 	// 	console.log(currLoc)
@@ -85,4 +89,21 @@ document.querySelector('.copy-loc').addEventListener('click', () => {
 	//add them to the clipboard like this: 
 	// github.io/travelTip/index.html?***lat=3.14***&***lng=1.63***
 
-});
+renderWeather()
+
+function renderWeather() {
+    let coords = { lat: 67, lng: -50 }
+    weatherService.getForcast(coords).then(res => {
+
+        let strHTML = `<p>location:TBD</p>
+         <p>weather description:${res.description}</p>
+         <p>current temperature:${res.temp}</p>
+         <p>min temperature:${res.tempMin}</p>
+         <p>max temperature:${res.tempMax}</p>
+         <p>wind speed:${res.windSpeed}</p>
+         <p>wind speed:${res.windDirection}</p>`
+
+        let elWeather = document.querySelector('.weather-container');
+        elWeather.innerHTML = strHTML;
+    })
+}

@@ -9,26 +9,32 @@
 </head>
 
 <body>
-    <header class="header-container">
-        <h1 class="title">TravelTip</h1>
-        <section class="loc-search-container">
-            <input type="text" placeholder="Enter Location">
-            <button class="loc-search-btn">GO</button>
+
+    <section class="container">
+
+        <section class="location-container">
+            <h1 class="title">TravelTip</h1>
+            <section class="loc-search-container">
+                <input type="text" placeholder="Enter Location">
+                <button class="loc-search-btn">GO</button>
+            </section>
+            <button class="my-loc-btn">My Location</button>
+            <p class="curr-loc">Location: <span>No location yet</span></p>
+            <button class="copy-loc">Copy Location</button>
         </section>
-        <button class="my-loc-btn">My Location</button>
-    </header>
 
-    <section class="location-container">
-        <p class="curr-loc">Location: <span>No location yet</span></p>
-        <button class="copy-loc">Copy Location</button>
+        <section class="weather-container"></section>
+
+        <section class="map-container">
+            <div id="map" style="width: 100%; height: 400px;"></div>
+            <button class="btn">Click Me</button>
+        </section>
+
     </section>
+<<<<<<< HEAD
 
-    <section class="weather-container">WATHER</section>
-
-    <section class="map-container">
-        <div id="map" style="width: 100%; height: 400px;"></div>
-    </section>
-
+=======
+>>>>>>> 53acf1ba322ed24fd52b110ea4b1a60fc0c8dc24
     <script src="lib/axios.js"></script>
     <script type="module" src="js/main.js"></script>
 
