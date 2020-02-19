@@ -1,0 +1,17 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.loc-search-container {
+  margin-inline-start: auto;
+}
+
+.weather-container {
+  width: 50%;
+}
+
+.map-container {
+  width: 50vw;
+}
