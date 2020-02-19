@@ -2,11 +2,12 @@ console.log('Main!');
 
 import locService from './services/loc-service.js';
 import mapService from './services/map-service.js';
-// import weatherService from './services/weather-service';
+import weatherService from './services/weather-service.js';
 
+weatherService.getForcast();
 
 locService.getLocs()
-	.then(locs => console.log('locs', locs))
+    .then(locs => console.log('locs', locs))
 
 window.onload = () => {
 	mapService.initMap()
