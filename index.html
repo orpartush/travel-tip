@@ -12,16 +12,19 @@
 
 	<section class="container">
 
-		<section class="location-container">
+		<header class="header-container">
 			<h1 class="title">TravelTip</h1>
 			<section class="loc-search-container">
 				<input class="location-text" type="text" placeholder="Enter Location">
 				<button class="loc-search-btn">GO</button>
+				<button class="my-loc-btn">My Location</button>
 			</section>
-			<button class="my-loc-btn">My Location</button>
+		</header>
+		
+		<section class="curr-loc-container">
+			<textarea class="hidden-url" name="hidden-url" cols="30"></textarea>
 			<p class="curr-loc">Location: <span>No location yet</span></p>
 			<button class="copy-loc-btn">Copy Location</button>
-			<textarea class="hidden-url" name="hidden-url" cols="30"></textarea>
 		</section>
 
 		<section class="weather-container"></section>

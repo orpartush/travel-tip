@@ -94,14 +94,19 @@ function renderWeather() {
 		lng: coords.lng
 	}
 	weatherService.getForcast(weatherCoords).then(res => {
+		let description = res.description.charAt(0).toUpperCase() + res.description.slice(1);
 		let strHTML = `
-			<p>location:${res.location}</p>
-			<p>weather description:${res.description}</p>
-			<p>current temperature:${res.temp}</p>
-			<p>min temperature:${res.tempMin}</p>
-			<p>max temperature:${res.tempMax}</p>
-			<p>wind speed:${res.windSpeed}</p>
-			<p>wind speed:${res.windDirection}</p>
+			<p>Location:
+				<p class="weather-res">${res.location}</p> 
+			</p>
+			<p>Weather Description: 
+				<p class="weather-res">${description}</p>
+			</p>
+			<p>Current Temperature: <span class="weather-res">${res.temp}</span></p>
+			<p>Min Temperature: <span class="weather-res">${res.tempMin}</span></p>
+			<p>Max Temperature: <span class="weather-res">${res.tempMax}</span></p>
+			<p>Wind Speed: <span class="weather-res">${res.windSpeed}</span></p>
+			<p>Wind Speed: <span class="weather-res">${res.windDirection}</span></p>
 		`;
 
 		let elWeather = document.querySelector('.weather-container');
