@@ -3,8 +3,6 @@ import mapService from './services/map-service.js';
 import weatherService from './services/weather-service.js';
 import utilsService from './services/utils-service.js';
 
-// weatherService.getForcast();
-
 var coords = {
 	lat: null,
 	lng: null
@@ -27,7 +25,6 @@ window.onload = () => {
 				renderWeather();
 				return;
 			}
-			//goes to the user location and marking it
 			locService.getPosition()
 				.then(userPos => {
 					const {
@@ -47,7 +44,6 @@ window.onload = () => {
 		.catch(err => console.log('INIT MAP ERROR', err));
 }
 
-//on My Location btn
 document.querySelector('.my-loc-btn').addEventListener('click', () => {
 	locService.getPosition()
 		.then(userPos => {
@@ -74,8 +70,6 @@ document.querySelector('.copy-loc-btn').addEventListener('click', () => {
 	elHiddenTxt.select();
 	document.execCommand('copy');
 });
-
-
 
 document.querySelector('.loc-search-btn').addEventListener('click', () => {
 	let locSearch = document.querySelector('.location-text');
