@@ -93,7 +93,6 @@ button:hover {
 .weather-container {
     grid-area: weather;
     padding-block-start: 0;
-    font-weight: 500;
     font-size: 1.1rem;
 }
 
@@ -102,6 +101,7 @@ button:hover {
     border: 1px solid #5d5d5a;
     padding: 5px;
     text-align: center;
+    font-weight: 600;
 }
 
 .map-container {
