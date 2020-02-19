@@ -1,4 +1,4 @@
-export default{
+export default {
 	getLocs: getLocs,
 	getPosition: getPosition
 }
