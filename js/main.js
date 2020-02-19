@@ -10,22 +10,21 @@ var coords = {
 	lng: null
 }
 
-console.log(weatherService.getForcast(coords))
 
 window.onload = () => {
 	mapService.initMap()
 		.then(() => {
-			let urlLat = utilsService.getParameterByName('lat');
-			let urlLng = utilsService.getParameterByName('lng');
+			let urlLat = +utilsService.getParameterByName('lat');
+			let urlLng = +utilsService.getParameterByName('lng');
 			if (urlLat && urlLng) {
-				console.log(+urlLat, +urlLng);
-				mapService.panTo(+urlLat, +urlLng);
+				mapService.panTo(urlLat, urlLng);
 				mapService.addMarker({
-					lat: +urlLat,
-					lng: +urlLng
+					lat: urlLat,
+					lng: urlLng
 				});
-				coords.lat = +urlLat;
-				coords.lng = +urlLng;
+				coords.lat = urlLat;
+				coords.lng = urlLng;
+				renderWeather();
 				return;
 			}
 			//goes to the user location and marking it
@@ -42,10 +41,10 @@ window.onload = () => {
 					});
 					coords.lat = latitude;
 					coords.lng = longitude;
-					// console.log(coords);
+					renderWeather();
 				});
 		})
-		.catch(console.log('INIT MAP ERROR'));
+		.catch(err => console.log('INIT MAP ERROR', err));
 }
 
 //on My Location btn
@@ -66,41 +65,49 @@ document.querySelector('.my-loc-btn').addEventListener('click', () => {
 		}).catch(err => console.log('err!!!', err));
 });
 
-document.querySelector('.copy-loc').addEventListener('click', () => {
-	//get the curr location's lat nad lng.
-	// http://127.0.0.1:5501/index.html?lat=34.0929792&lng=36.8069888
+document.querySelector('.copy-loc-btn').addEventListener('click', () => {
 	let elHiddenTxt = document.querySelector('.hidden-url');
 	let currLocLink = `http://127.0.0.1:5501/index.html?lat=${coords.lat}&lng=${coords.lng}`;
 	elHiddenTxt.value = currLocLink;
-	console.log(currLocLink);
 	elHiddenTxt.select();
-	// Copy its contents
 	document.execCommand('copy');
 });
 
-renderWeather()
+
+
+document.querySelector('.loc-search-btn').addEventListener('click', () => {
+	let locationTxt = document.querySelector('.location-text').value;
+	locService.findLocation(locationTxt).then(res => {
+		coords.lat = res.lat;
+		coords.lng = res.lng;
+		renderWeather()
+	});
+})
+
 
 function renderWeather() {
 	let weatherCoords = {
-		lat: 67,
-		lng: -50
+		lat: coords.lat,
+		lng: coords.lng
 	}
 	weatherService.getForcast(weatherCoords).then(res => {
+		let strHTML = `
+			<p>location:${res.location}</p>
+			<p>weather description:${res.description}</p>
+			<p>current temperature:${res.temp}</p>
+			<p>min temperature:${res.tempMin}</p>
+			<p>max temperature:${res.tempMax}</p>
+			<p>wind speed:${res.windSpeed}</p>
+			<p>wind speed:${res.windDirection}</p>
+		`;
 
-		let strHTML = `<p>location:TBD</p>
-         <p>weather description:${res.description}</p>
-         <p>current temperature:${res.temp}</p>
-         <p>min temperature:${res.tempMin}</p>
-         <p>max temperature:${res.tempMax}</p>
-         <p>wind speed:${res.windSpeed}</p>
-         <p>wind speed:${res.windDirection}</p>`
-
-        let elWeather = document.querySelector('.weather-container');
-        elWeather.innerHTML = strHTML;
-    })
+		let elWeather = document.querySelector('.weather-container');
+		elWeather.innerHTML = strHTML;
+		renderLocation(res.location);
+	})
 }
 
-document.querySelector('.loc-search-btn').addEventListener('click', () => {
-    let locationTxt = document.querySelector('.location-text').value;
-    let x = locService.findLocation(locationTxt).then();
-})
+function renderLocation(loc) {
+	let elLocation = document.querySelector('.curr-loc>span');
+	elLocation.innerText = loc;
+}
